@@ -1,0 +1,178 @@
+{	
+	"pages": [
+
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"navigationBarBackgroundColor":"#007aff",
+				"navigationBarTextStyle": "black"
+			}
+			
+		},
+		{
+			"path":"pages/activeMoney/index",
+			"style": {
+				"navigationBarTitleText": "授信流程",
+				"navigationBarBackgroundColor":"#007aff",
+				"navigationBarTextStyle": "black"
+			}
+			
+		},
+
+		{
+			"path": "pages/userinfo/userinfo",
+			"style": {
+				"navigationBarTitleText": "修改资料"
+			}
+		}, {
+			"path": "pages/public/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": false,
+					"animationType": "slide-in-bottom"
+				}
+			}
+		}, {
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "我的",
+				// #ifdef MP
+				"navigationStyle": "custom",
+				// #endif
+				"app-plus": {
+					"bounce": "none",
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue60f",
+								"fontSize": "24",
+								"color": "#303133",
+								"width": "46px",
+								"background": "rgba(0,0,0,0)"
+							},
+							{
+								"fontSrc": "/static/yticon.ttf",
+								"text": "\ue744",
+								"fontSize": "28",
+								"color": "#303133",
+								"background": "rgba(0,0,0,0)",
+								"redDot": true
+							}
+						]
+					}
+				}
+			}
+		}, {
+			"path": "pages/detail/detail",
+			"style": {
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent"
+					}
+				}
+			}
+		}, {
+			"path": "pages/center/center",
+			"style": {
+				"navigationBarTitleText": "权益中心",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/set/set",
+			"style": {
+				"navigationBarTitleText": "设置",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		}
+		
+	    
+        
+        
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#f8f8f8"
+	},
+	"tabBar": {
+		"color": "#C0C4CC",
+		"selectedColor": "#fa436a",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tab-home.png",
+				"selectedIconPath": "static/tab-home-current.png",
+				"text": "首页"
+			},
+			
+			{
+				"pagePath": "pages/center/center",
+				"iconPath": "static/tab-cate.png",
+				"selectedIconPath": "static/tab-cate-current.png",
+				"text": "权益中心"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"iconPath": "static/tab-my.png",
+				"selectedIconPath": "static/tab-my-current.png",
+				"text": "个人中心"
+			}
+		]
+	},
+	"uni_modules": { // uni_modules配置
+	        "dependencies": [], // 依赖的 uni_modules 插件ID列表
+	        "encrypt": [ // 配置云函数，公共模块，clientDB Action加密
+	            "uniCloud/cloudfunctions/uni-admin/controller/permission.js"
+	        ],
+	        "platforms": { // 平台兼容性：y 表示 Yes，支持；n 表示 No，不支持；u 表示 Unknown，不确定；默认为 u
+	            "cloud": { // 云端平台兼容性
+	                "tcb": "y",
+	                "aliyun": "y"
+	            },
+	            "client": { // 前端平台兼容性
+	                "App": {
+	                    "app-vue": "y",
+	                    "app-nvue": "n"
+	                },
+	                "H5-mobile": {
+	                    "Safari": { // 当需要指定最小版本才支持时，可以配置minVersion
+	                        "minVersion": "14.0.2"
+	                    },
+	                    "Android Browser": "y",
+	                    "微信浏览器(Android)": "u",
+	                    "QQ浏览器(Android)": "u"
+	                },
+	                "H5-pc": {
+	                    "Chrome": "y",
+	                    "IE": "u",
+	                    "Edge": "u",
+	                    "Firefox": "u",
+	                    "Safari": "u"
+	                },
+	                "小程序": {
+	                    "微信": "y",
+	                    "阿里": "y",
+	                    "百度": "y",
+	                    "字节跳动": "y",
+	                    "QQ": "y"
+	                },
+	                "快应用": {
+	                    "华为": "u",
+	                    "联盟": "u"
+	                }
+	            }
+	        }
+	    }
+}
