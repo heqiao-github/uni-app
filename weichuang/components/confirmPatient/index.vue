@@ -13,9 +13,9 @@
 		</view>
 		<titles title="患者身份证信息"></titles>
 		<view class="">
-			<inputs :config="name"></inputs>
-			<inputs :config="idcard"></inputs>
-			<inputs :config="phone"></inputs>
+			<inputs :config="name" :data="patient"></inputs>
+			<inputs :config="idcard" :data="patient"></inputs>
+			<inputs :config="phone" :data="patient"></inputs>
 		</view>
 		<titles title="患者就医信息"></titles>
 		
@@ -30,20 +30,26 @@
 			inputs,
 			titles
 		},
+		props:{
+			patient: Object
+		},
 		data() {
 			return {
 				name: {
 					placeholder: "请输入姓名",
-					label: "姓名"
+					label: "姓名",
+					type:"name"
 				},
 				idcard: {
 					label: "身份证号",
 					placeholder: "请输入身份证号码",
+					type:"idcard"
 				},
 				
 				phone: {
 					label:"患者手机",
-					placeholder: "请输入患者手机"
+					placeholder: "请输入患者手机",
+					type:"tel"
 				}
 			}
 		},

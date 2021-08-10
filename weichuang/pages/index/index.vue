@@ -2,7 +2,7 @@
 	<view class="container">
 		<!-- 头部轮播 -->
 		<view class="background">
-			
+
 		</view>
 		<view class="header" style="height: 300px; position: relative;">
 			<view class="mianxi">
@@ -11,7 +11,7 @@
 			<view class="" style="padding: 10px 0 20px 0;">
 				提倡理性消费，合理使用贷款
 			</view>
-			<view class=""style="padding: 10px 0 20px 0;">
+			<view class="" style="padding: 10px 0 20px 0;">
 				最高免息额度（元）
 			</view>
 			<view class="money">
@@ -20,11 +20,11 @@
 			<view class="6">
 				免息额度，最终以实际授信额度为准
 			</view>
-			 <button type="primary" style="margin-top: 20px;
+			<button type="primary" style="margin-top: 20px;
 					border-radius: 20px;margin-top: 20px;
-					border-radius: 20px;width:206px;" @tap="activeMoney">激活免息额度	
+					border-radius: 20px;width:206px;" @tap="activeMoney">{{status.message || "激活免息额度"}} 
 			</button>
-			</view>
+		</view>
 		<!-- 分类 -->
 		<view class="cate-section">
 			<view class="cate-item">
@@ -33,51 +33,113 @@
 			</view>
 			<view class="cate-item">
 				<image src="/static/temp/c5.png"></image>
-				<text>免息无压力</text>
+				<text>0期分期</text>
 			</view>
 			<view class="cate-item">
 				<image src="/static/temp/c6.png"></image>
-				<text>随借随还</text>
+				<text>手术保障</text>
 			</view>
-			
+
 		</view>
 		<view class="process" style="margin:10px">
 			贷款流程
 		</view>
-		<view class="ad-1">
-			<image src="/static/temp/liucheng.png" mode="scaleToFill"></image>
+		<view class="process-box">
+			<view class="apply" style="display: flex;flex-direction: column;">
+				<view class="back" style="width: 25px;height: 25px;background-color: #10aeff;">
+					<text class="iconfont icon-shenqing"></text>
+				</view>
+
+				<view class="" style="display: flex;flex-direction: column;">
+					<text>申请</text>
+					<text>入组</text>
+				</view>
+			</view>
+			<view class="arrow iconfont icon-jiantou">
+			</view>
+			<view class="active">
+
+				<view class="back">
+					<text class="iconfont icon-activate"></text>
+				</view>
+				<view class="" style="display: flex;flex-direction: column;">
+					<text>权益</text>
+					<text>激活</text>
+				</view>
+
+			</view>
+			<view class="arrow iconfont icon-jiantou">
+			</view>
+			<view class="cure">
+				<view class="back">
+					<text class="iconfont icon-zhiliao"></text>
+				</view>
+				<view class="" style="display: flex;flex-direction: column;">
+					<text>手术</text>
+					<text>治疗</text>
+				</view>
+			</view>
+			<view class="arrow iconfont icon-jiantou">
+			</view>
+			<view class="draw-money">
+				<view class="back">
+					<text class="iconfont icon-tikuan"></text>
+				</view>
+				<view class="" style="display: flex;flex-direction: column;">
+					<text>提款</text>
+					<text>申请</text>
+				</view>
+			</view>
+			<view class="arrow iconfont icon-jiantou">
+			</view>
+			<view class="repay">
+				<view class="back">
+					<text class="iconfont icon-huankuan"></text>
+				</view>
+				<view class="" style="display: flex;flex-direction: column;">
+					<text>按期</text>
+					<text>还款</text>
+				</view>
+			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import "../../static/font/iconfont.css"
 	import {
-		getAdvertList
-	} from '@/api/sms/advert.js'
+		mapGetters
+	} from 'vuex';
 
 	export default {
 
 		data() {
 			return {
-				swiperCurrent: 0,
-				swiperLength: 0,
-				carouselList: [],
-				goodsList: []
+				
 			};
 		},
 
 		onShow() {
-			
+
+		},
+		computed: {
+			...mapGetters(['hasLogin',"status"])
 		},
 		methods: {
-			
+
 			activeMoney() {
-				console.log(111)
-				uni.navigateTo({
-					url:"/pages/activeMoney/index"
-				})
+				if (this.hasLogin) {
+					uni.navigateTo({
+						url: "/pages/activeMoney/index"
+					})
+				} else {
+					uni.navigateTo({
+						url: "/pages/public/login?path=" + encodeURIComponent("/pages/activeMoney/index")
+					})
+				}
+
 			}
-			
+
 		},
 		// #ifndef MP
 		// 标题栏input搜索框点击
@@ -110,29 +172,65 @@
 <style lang="scss">
 	.container {
 		height: 100%;
+
 		.background {
 			background-color: #007aff;
 			height: 220px;
 		}
+
 		.header {
 			height: 300px;
 			background-color: #FFFFFF;
 			margin: -200px 15px 0 15px;
-			
+
 			text-align: center;
 			font-size: 12px;
 		}
+
 		.process::before {
-			content:"";
-			border:3px solid #007aff;
-			
+			content: "";
+			border: 3px solid #007aff;
+
 		}
+
+		.process-box {
+			display: flex;
+			justify-content: space-around;
+			margin: 10px;
+			background: #fff;
+			height: 90px;
+
+			.back {
+				width: 25px;
+				height: 25px;
+				background-color: rgb(16, 174, 255);
+				border-radius: 25px;
+				text-align: center;
+				vertical-align: middle;
+
+				.iconfont {
+					color: #fff;
+				}
+			}
+			.arrow.iconfont {
+				color: #7c7c7c;
+			}
+
+			>view {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: space-evenly;
+			}
+		}
+
 		.money {
 			font-size: 39px;
-			    font-weight: 600;
-			    margin-bottom: 10px;
+			font-weight: 600;
+			margin-bottom: 10px;
 		}
-		.mianxi{
+
+		.mianxi {
 			position: absolute;
 			left: 0;
 			top: 30px;
@@ -145,8 +243,9 @@
 			border-radius: 0 13px 13px 0;
 		}
 	}
+
 	/* #ifdef MP */
-	
+
 	.mp-search-box {
 		position: absolute;
 		left: 0;
@@ -246,7 +345,7 @@
 		}
 	}
 
-	
+
 	/* 分类 */
 	.cate-section {
 		display: flex;
@@ -255,7 +354,7 @@
 		flex-wrap: wrap;
 		padding: 30upx 22upx;
 		background: #fff;
-		    margin: 0 15px;
+		margin: 0 15px;
 
 		.cate-item {
 			display: flex;
@@ -288,7 +387,7 @@
 		}
 	}
 
-	
+
 	.f-header {
 		display: flex;
 		align-items: center;
@@ -325,8 +424,4 @@
 			color: $font-color-light;
 		}
 	}
-
-	
-	
-	
 </style>

@@ -8,34 +8,26 @@
 
 <script>
 	export default {
-		data() {
-			return {
-				
-			};
-		},
 		methods:{
-			navTo(url){
-				this.$api.msg(`跳转到${url}`);
-			},
 			//退出登录
 			toLogout(){
 				uni.showModal({
 				    content: '确定要退出登录么',
 				    success: (e)=>{
 				    	if(e.confirm){
-				    		this.$store.dispatch('user/logout')
-				    		setTimeout(()=>{
-				    			uni.navigateBack();
-				    		}, 200)
+				    		this.$store.dispatch('user/logout').then(res=>{
+								console.log("logout2222")
+								uni.switchTab({
+									url:"/pages/user/user"
+								})
+								console.log("4444")
+							})
+							
 				    	}
 				    }
 				});
-			},
-			//switch
-			switchChange(e){
-				let statusTip = e.detail.value ? '打开': '关闭';
-				this.$api.msg(`${statusTip}消息推送`);
-			},
+			}
+			
 
 		}
 	}

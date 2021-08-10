@@ -7,14 +7,20 @@
 					<confirm-tel :phone="phone"></confirm-tel>
 				</view>
 				<view class="" v-else-if="index===1">
-					<confirm-credit></confirm-credit>
+					<confirm-credit :apply="apply"></confirm-credit>
 				</view>
 				<view class="" v-else-if="index===2">
-					<confirm-patient></confirm-patient>
+					<confirm-patient :patient="patient"></confirm-patient>
 				</view>
-				<view class="uni-btn-v">
+				<view class="uni-btn-v" v-if="(index ===0 ) || (index ===1)  ">
 					<button @tap="next">下一步</button>
-
+				</view>
+				<view class="uni-btn-v" v-if="index ===2 ">
+					<button @tap="finish">提交审核</button>
+					{{index}}
+				</view>
+				<view class="uni-btn-v" v-if="index ===3 ">
+					申请完成！！！
 				</view>
 			</form>
 		</view>
@@ -27,6 +33,7 @@
 	import confirmTel from '@/components/confirmTel/index.vue'
 	import confirmCredit from '@/components/confirmCredit/index.vue'
 	import confirmPatient from '@/components/confirmPatient/index.vue'
+	import {finishApply} from '@/api/user.js'
 	export default {
 		components: {
 			uniSteps,
@@ -50,9 +57,22 @@
 					tel:"",
 					yzm:"",
 					isTcp: false
+				},
+				apply: {
+					name: '',
+					idcard:'',
+					bankcard: '',
+					bankname: '',
+					tel:''
+				},
+				patient: {
+					name:"",
+					idcard:"",
+					tel:""
 				}
 			}
 		},
+		
 		methods: {
 			next() {
 				if(this.checkPhone()) {
@@ -61,10 +81,30 @@
 				} 
 				
 			},
+			finish() {
+				finishApply({
+					phone:this.phone,
+					apply:this.apply,
+					patient:this.patient
+				}).then(res => {
+					debugger
+					this.index++;
+					console.log(res,typeof this.$store.commit);
+					
+					this.$store.commit("user/SET_STATUS",res.data)
+					let tiemr = setTimeout(()=>{
+						uni.switchTab({
+							url:"/pages/index/index"
+						})
+					},3000)
+				})
+				
+			},
 			checkPhone() {
 				console.log(this.phone,2222)
+				return true;
 				if(this.phone.tel !=="" && this.phone.tel.length === 11 && this.phone.yzm !== "" && this.phone.isTcp) {
-					console.log(this.phone,4444)
+					
 					return true;
 				}
 				return false

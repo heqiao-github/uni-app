@@ -5,7 +5,9 @@ const state = {
   nickname: '',
   avatar: '',
   balance:0,
-  memberId:''
+  memberId:'',
+  status:{},
+  
 }
 
 const mutations = {
@@ -23,6 +25,9 @@ const mutations = {
   },
   SET_MEMBERID: (state, memberId) => {
     state.memberId = memberId
+  },
+  SET_STATUS: (state, status) => {
+	  state.status = status;
   }
 }
 
@@ -37,10 +42,13 @@ const actions = {
      login({
         ...data
       }).then(response => {
-        const {data : {access_token, token_type }} = response
+        const {data : {access_token, token_type,status }} = response
 		const token = token_type + "_" +access_token
 		uni.setStorageSync('token',token)
 		commit('SET_HAS_LOGIN', true)
+		debugger
+		console.log(status,"status")
+		commit("SET_STATUS",status)
         resolve(response)
       }).catch(error => {
         reject(error)

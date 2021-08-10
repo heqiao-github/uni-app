@@ -5,7 +5,7 @@
 		<view class="right-top-sign"></view>
 		<!-- 设置白色背景防止软键盘把下部绝对定位元素顶上来盖住输入框等 -->
 		<view class="wrapper">
-			<button class="confirm-btn" open-type="getUserInfo" @click="getUserInfo" :disabled="logining">小程序登录授权</button>
+			<button class="confirm-btn"  @click="getUserInfo" >小程序登录授权</button>
 			
 			<view class="tip">
 				温馨提示:未注册的用户,初次登录时将完成注册
@@ -47,10 +47,14 @@ export default {
 		return {
 			mobile: '',
 			password: '',
-			logining: false
+			logining: false,
+			url: ''
 		};
 	},
-	onLoad() {},
+	onLoad(option) {
+		console.log(option.path,330,option,)
+		this.url = option.path;
+	},
 	methods: {
 		...mapMutations(['login']),
 		inputChange(e) {
@@ -58,40 +62,14 @@ export default {
 			this[key] = e.detail.value;
 		},
 		navBack() {
+			
 			uni.navigateBack();
-		},
-		toRegist() {
-			this.$api.msg('去注册');
-		},
-		async toLogin() {
-			this.logining = true;
-			const { mobile, password } = this;
-			/* 数据验证模块
-				if(!this.$api.match({
-					mobile,
-					password
-				})){
-					this.logining = false;
-					return;
-				}
-				*/
-			const sendData = {
-				mobile,
-				password
-			};
-			const result = await this.$api.json('userInfo');
-			if (result.status === 1) {
-				this.login(result.data);
-				uni.navigateBack();
-			} else {
-				this.$api.msg(result.msg);
-				this.logining = false;
-			}
 		},
 		// 微信授权登录
 		getUserInfo() {
 			this.logining = true;
 			const _this = this;
+			
 			// #ifdef MP-WEIXIN || H5
 			uni.getProvider({
 				service: 'oauth',
@@ -103,11 +81,16 @@ export default {
 								tel:18817805101,
 								
 							})
-							.then(async (e) => {
-								
+							.then( e => {
 							 _this.$store.dispatch('user/getUserInfo').then(res => {
-							
-								 uni.navigateBack(res)
+								 if(_this.url) {
+									uni.navigateTo({
+										url: _this.url
+									})
+								 } else {
+									 uni.navigateBack(res)
+								 }
+								 
 							 })
 								
 							})

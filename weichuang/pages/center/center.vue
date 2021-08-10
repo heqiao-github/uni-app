@@ -20,14 +20,7 @@
 	import {
 		mapGetters
 	} from 'vuex';
-	import {
-		getCart,
-		checkAll,
-		deleteCart,
-		addCartItem,
-		updateCartItem,
-		removeCartItem
-	} from '@/api/oms/cart.js';
+	
 	import uniNumberBox from '@/components/uni-number-box.vue';
 	export default {
 		components: {
@@ -35,11 +28,11 @@
 		},
 		data() {
 			return {
-				totalPrice: 0, //总价格
+				
 				allChecked: false, //全选状态  true|false
 				empty: false, //空白页现实  true|false
-				cartItems: [],
-				coupon: 0
+				
+				
 			};
 		},
 		// onLoad(options) {

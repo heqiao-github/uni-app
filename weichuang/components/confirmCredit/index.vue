@@ -13,14 +13,14 @@
 		</view>
 		<titles title="贷款人身份证信息"></titles>
 		<view class="">
-			<inputs :config="name"></inputs>
-			<inputs :config="idcard"></inputs>
+			<inputs :config="name" :data="apply"></inputs>
+			<inputs :config="idcard" :data="apply"></inputs>
 		</view>
 		<titles title="贷款人本人银行卡信息"></titles>
 		<view class="">
-			<inputs :config="bankId"></inputs>
-			<inputs :config="bankName"></inputs>
-			<inputs :config="phone"></inputs>
+			<inputs :config="bankId" :data="apply"></inputs>
+			<inputs :config="bankName" :data="apply"></inputs>
+			<inputs :config="phone" :data="apply"></inputs>
 		</view>
 	</view>
 </template>
@@ -37,25 +37,33 @@
 			return {
 				name: {
 					placeholder: "请输入姓名",
-					label: "姓名"
+					label: "姓名",
+					type: "name"
 				},
 				idcard: {
 					label: "身份证号",
 					placeholder: "请输入身份证号码",
+					type: "idcard"
 				},
 				bankId: {
 					label:"银行卡号",
-					placeholder: "请输入银行卡"
+					placeholder: "请输入银行卡",
+					type: "bankcard"
 				},
 				bankName: {
 					label:"银行卡名称",
-					placeholder: "请输入银行卡名称"
+					placeholder: "请输入银行卡名称",
+					type: "bankname"
 				},
 				phone: {
 					label:"银行预留手机",
-					placeholder: "请输入银行卡名称"
+					placeholder: "请输入银行卡名称",
+					type:"tel"
 				}
 			}
+		},
+		props:{
+			apply:Object
 		},
 		methods: {
 			takePhoto() {
