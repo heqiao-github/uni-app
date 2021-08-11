@@ -17,7 +17,6 @@
 				</view>
 				<view class="uni-btn-v" v-if="index ===2 ">
 					<button @tap="finish">提交审核</button>
-					{{index}}
 				</view>
 				<view class="uni-btn-v" v-if="index ===3 ">
 					申请完成！！！

@@ -29,6 +29,14 @@ export function getUserInfo() {
 	})
 }
 
+export function getIndexInfo() {
+	return request({
+		url: '/consumer/getIndexInfo',
+		method: 'GET',
+	})
+}
+
+
 export function finishApply(data) {
 	return request({
 		url: '/consumer/finishApply',
@@ -36,3 +44,25 @@ export function finishApply(data) {
 		data: data,
 	})
 }
+
+export function activeApply(data) {
+	return request({
+		url: '/consumer/activeApply',
+		method: 'get',
+	})
+}
+
+export function agree(data) {
+	return request({
+		url: '/consumer/agree',
+		method: 'get',
+	})
+}
+
+export function quit() {
+	return request({
+		url: '/consumer/quit',
+		method: 'get',
+	})
+}
+

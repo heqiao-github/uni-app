@@ -22,7 +22,7 @@
 			</view>
 			<button type="primary" style="margin-top: 20px;
 					border-radius: 20px;margin-top: 20px;
-					border-radius: 20px;width:206px;" @tap="activeMoney">{{status.message || "激活免息额度"}} 
+					border-radius: 20px;width:206px;" @tap="activeMoney">{{status.message || "激活免息额度"}}
 			</button>
 		</view>
 		<!-- 分类 -->
@@ -46,14 +46,15 @@
 		</view>
 		<view class="process-box">
 			<view class="apply" style="display: flex;flex-direction: column;">
-				<view class="back" style="width: 25px;height: 25px;background-color: #10aeff;">
+				<view :class="{back:true, check:true}" style="width: 25px;height: 25px;background-color: #10aeff;">
 					<text class="iconfont icon-shenqing"></text>
 				</view>
 
-				<view class="" style="display: flex;flex-direction: column;">
-					<text>申请</text>
-					<text>入组</text>
+				<view :class="{check:checkIfShow(-1)}" style="display: flex;flex-direction: column;">
+					<text>额度</text>
+					<text>测算</text>
 				</view>
+				
 			</view>
 			<view class="arrow iconfont icon-jiantou">
 			</view>
@@ -62,8 +63,8 @@
 				<view class="back">
 					<text class="iconfont icon-activate"></text>
 				</view>
-				<view class="" style="display: flex;flex-direction: column;">
-					<text>权益</text>
+				<view :class="{check:checkIfShow(0)}" style="display: flex;flex-direction: column;">
+					<text>额度</text>
 					<text>激活</text>
 				</view>
 
@@ -74,7 +75,7 @@
 				<view class="back">
 					<text class="iconfont icon-zhiliao"></text>
 				</view>
-				<view class="" style="display: flex;flex-direction: column;">
+				<view :class="{check:checkIfShow(1)}" style="display: flex;flex-direction: column;">
 					<text>手术</text>
 					<text>治疗</text>
 				</view>
@@ -85,7 +86,7 @@
 				<view class="back">
 					<text class="iconfont icon-tikuan"></text>
 				</view>
-				<view class="" style="display: flex;flex-direction: column;">
+				<view :class="{check:checkIfShow(2)}" style="display: flex;flex-direction: column;">
 					<text>提款</text>
 					<text>申请</text>
 				</view>
@@ -96,7 +97,7 @@
 				<view class="back">
 					<text class="iconfont icon-huankuan"></text>
 				</view>
-				<view class="" style="display: flex;flex-direction: column;">
+				<view :class="{check:checkIfShow(3)}" style="display: flex;flex-direction: column;">
 					<text>按期</text>
 					<text>还款</text>
 				</view>
@@ -107,6 +108,8 @@
 
 <script>
 	import "../../static/font/iconfont.css"
+
+
 	import {
 		mapGetters
 	} from 'vuex';
@@ -115,23 +118,55 @@
 
 		data() {
 			return {
-				
+
 			};
 		},
+		onLoad() {
 
+			uni.startPullDownRefresh();
+		},
+		onPullDownRefresh() {
+			console.log('refresh');
+			this.$store.dispatch("user/getHomeInfo");
+			setTimeout(() => {
+				uni.stopPullDownRefresh();
+			}, 1000);
+		},
 		onShow() {
 
 		},
 		computed: {
-			...mapGetters(['hasLogin',"status"])
+			...mapGetters(['hasLogin', "status"]),
+			
 		},
 		methods: {
-
+			checkIfShow(index){
+				console.log(index,444444)
+				return  index < this.status.code ? true : false;
+			},
 			activeMoney() {
 				if (this.hasLogin) {
-					uni.navigateTo({
-						url: "/pages/activeMoney/index"
-					})
+					debugger
+					switch (this.status.code) {
+						case -1: // // 预授信
+							uni.navigateTo({
+								url: "/pages/activeMoney/index"
+							});
+							break;
+						case 0: // 费用核查激活
+							uni.navigateTo({
+								url: "/pages/moneyCheck/moneyCheck"
+							})
+							break;
+						case 1: // 上次知情同意书
+							uni.navigateTo({
+								url: "/pages/agree/agree"
+							})
+							break;
+						default: 
+							break;
+					}
+
 				} else {
 					uni.navigateTo({
 						url: "/pages/public/login?path=" + encodeURIComponent("/pages/activeMoney/index")
@@ -212,6 +247,10 @@
 					color: #fff;
 				}
 			}
+			.check {
+				color: green;
+			}
+
 			.arrow.iconfont {
 				color: #7c7c7c;
 			}

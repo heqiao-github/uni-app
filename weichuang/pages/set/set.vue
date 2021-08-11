@@ -1,12 +1,17 @@
 <template>
 	<view class="container">
+		<view class="list-cell log-out-btn" @click="quit">
+			<text class="cell-tit">放弃权益</text>
+		</view>
 		<view class="list-cell log-out-btn" @click="toLogout">
 			<text class="cell-tit">退出登录</text>
 		</view>
+		
 	</view>
 </template>
 
 <script>
+	import {quit} from "../../api/user.js"
 	export default {
 		methods:{
 			//退出登录
@@ -16,7 +21,24 @@
 				    success: (e)=>{
 				    	if(e.confirm){
 				    		this.$store.dispatch('user/logout').then(res=>{
-								console.log("logout2222")
+								
+								uni.switchTab({
+									url:"/pages/user/user"
+								})
+								console.log("4444")
+							})
+							
+				    	}
+				    }
+				});
+			},
+			quit() {
+				uni.showModal({
+				    content: '放弃权益？？',
+				    success: (e)=>{
+				    	if(e.confirm){
+				    		quit().then(res=>{
+								
 								uni.switchTab({
 									url:"/pages/user/user"
 								})

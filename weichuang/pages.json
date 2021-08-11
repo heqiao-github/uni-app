@@ -6,7 +6,8 @@
 			"style": {
 				"navigationBarTitleText": "首页",
 				"navigationBarBackgroundColor":"#007aff",
-				"navigationBarTextStyle": "black"
+				"navigationBarTextStyle": "black",
+				"enablePullDownRefresh": true
 			}
 			
 		},
@@ -89,6 +90,24 @@
 			"path": "pages/set/set",
 			"style": {
 				"navigationBarTitleText": "设置",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/moneyCheck/moneyCheck",
+			"style": {
+				"navigationBarTitleText": "额度激活",
+				"app-plus": {
+					"bounce": "none"
+				}
+			}
+		},
+		{
+			"path": "pages/agree/agree",
+			"style": {
+				"navigationBarTitleText": "知情同意书",
 				"app-plus": {
 					"bounce": "none"
 				}
