@@ -88,8 +88,6 @@
 				}).then(res => {
 					debugger
 					this.index++;
-					console.log(res,typeof this.$store.commit);
-					
 					this.$store.commit("user/SET_STATUS",res.data)
 					let tiemr = setTimeout(()=>{
 						uni.switchTab({

@@ -54,7 +54,7 @@
 					<text>额度</text>
 					<text>测算</text>
 				</view>
-				
+
 			</view>
 			<view class="arrow iconfont icon-jiantou">
 			</view>
@@ -137,12 +137,12 @@
 		},
 		computed: {
 			...mapGetters(['hasLogin', "status"]),
-			
+
 		},
 		methods: {
-			checkIfShow(index){
-				console.log(index,444444)
-				return  index < this.status.code ? true : false;
+			checkIfShow(index) {
+				console.log(index, 444444, this.status.code)
+				return index < this.status.code ? true : false;
 			},
 			activeMoney() {
 				if (this.hasLogin) {
@@ -163,7 +163,12 @@
 								url: "/pages/agree/agree"
 							})
 							break;
-						default: 
+						case 4:
+							uni.switchTab({
+								url: "/pages/center/center"
+							})
+							break;
+						default:
 							break;
 					}
 
@@ -210,7 +215,7 @@
 
 		.background {
 			background-color: #007aff;
-			height: 220px;
+			height: 200px;
 		}
 
 		.header {
@@ -234,6 +239,7 @@
 			margin: 10px;
 			background: #fff;
 			height: 90px;
+			box-shadow: 0 2px 16px #aaaaaa, 0 0 1px #aaaaaa, 0 0 1px #aaaaaa;
 
 			.back {
 				width: 25px;
@@ -247,6 +253,7 @@
 					color: #fff;
 				}
 			}
+
 			.check {
 				color: green;
 			}
