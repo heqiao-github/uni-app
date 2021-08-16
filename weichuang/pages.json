@@ -81,7 +81,7 @@
 			"path": "pages/center/center",
 			"style": {
 				"navigationBarTitleText": "权益中心",
-				"navigationBarBackgroundColor":"#d3d300",
+				"navigationBarBackgroundColor":"#0055ff",
 				"navigationBarTextStyle": "black",
 				"enablePullDownRefresh": true,
 				"app-plus": {

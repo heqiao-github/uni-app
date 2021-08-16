@@ -11,14 +11,20 @@
 			<view class="" style="padding: 10px 0 20px 0;">
 				提倡理性消费，合理使用贷款
 			</view>
-			<view class="" style="padding: 10px 0 20px 0;">
+			<view v-if="this.status.code !== 5" class="" style="padding: 10px 0 20px 0;">
 				最高免息额度（元）
 			</view>
-			<view class="money">
-				6000
+			<view v-if="this.status.code===5">
+				免息金额
 			</view>
-			<view class="6">
+			<view class="money">
+				6,000
+			</view>
+			<view class="6" v-if="this.status.code !== 5">
 				免息额度，最终以实际授信额度为准
+			</view>
+			<view class="" v-else>
+				-- 请按时还款- -
 			</view>
 			<button type="primary" style="margin-top: 20px;
 					border-radius: 20px;margin-top: 20px;
@@ -97,7 +103,7 @@
 				<view class="back">
 					<text class="iconfont icon-huankuan"></text>
 				</view>
-				<view :class="{check:checkIfShow(3)}" style="display: flex;flex-direction: column;">
+				<view :class="{check:checkIfShow(4)}" style="display: flex;flex-direction: column;">
 					<text>按期</text>
 					<text>还款</text>
 				</view>
@@ -146,7 +152,7 @@
 			},
 			activeMoney() {
 				if (this.hasLogin) {
-					debugger
+					
 					switch (this.status.code) {
 						case -1: // // 预授信
 							uni.navigateTo({
@@ -158,7 +164,7 @@
 								url: "/pages/moneyCheck/moneyCheck"
 							})
 							break;
-						case 1: // 上次知情同意书
+						case 2: // 上次知情同意书
 							uni.navigateTo({
 								url: "/pages/agree/agree"
 							})
@@ -168,6 +174,10 @@
 								url: "/pages/center/center"
 							})
 							break;
+						case 5:
+							uni.switchTab({
+								url: "/pages/center/center"
+							})
 						default:
 							break;
 					}
@@ -230,6 +240,7 @@
 		.process::before {
 			content: "";
 			border: 3px solid #007aff;
+			border-radius: 3px;
 
 		}
 

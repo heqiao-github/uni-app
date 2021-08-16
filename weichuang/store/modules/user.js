@@ -56,7 +56,7 @@ const actions = {
 				const token = token_type + "_" + access_token
 				uni.setStorageSync('token', token)
 				commit('SET_HAS_LOGIN', true)
-				debugger
+			
 				console.log(status, "status")
 				commit("SET_STATUS", status)
 				resolve(response)

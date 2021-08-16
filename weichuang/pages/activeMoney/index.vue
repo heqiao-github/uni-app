@@ -62,6 +62,7 @@
 					idcard:'',
 					bankcard: '',
 					bankname: '',
+					bankphone:"",
 					tel:''
 				},
 				patient: {
@@ -86,7 +87,7 @@
 					apply:this.apply,
 					patient:this.patient
 				}).then(res => {
-					debugger
+					
 					this.index++;
 					this.$store.commit("user/SET_STATUS",res.data)
 					let tiemr = setTimeout(()=>{

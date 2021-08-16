@@ -10,6 +10,43 @@
 				<view class="navigator" @click="navToLogin">去登陆></view>
 			</view>
 		</view>
+		<view  v-else class="" >
+			<view class="top"  >
+				<view class="" style="display: flex;justify-content: space-between;margin-bottom: 10px;">
+					<text>提款金额（元）</text>
+					<text>放款金额：2020-08-15 09:42:52</text>
+				</view>
+				<view class="" style="font-size: 80rpx;">
+					6,000
+				</view>
+				<view class="" style="display: flex;justify-content: space-between;margin-bottom: 10px;">
+					<text>年化利率： 0%</text>
+					<text>时长：12个月</text>
+				</view>
+			</view>
+			<view class=""style="background-color: #9198e5;" >
+				<view class="wenzi" >
+					<view class="" style="display: flex;justify-content: space-between;margin-bottom: 10px;">
+						<text>权益编号：</text>
+						<text>SX20215488888881011</text>
+					</view>
+					<view class="" style="display: flex;justify-content: space-between;margin-bottom: 10px;">
+						<text>已还本金：</text>
+						<text>0</text>
+					</view>
+					<view class="" style="display: flex;justify-content: space-between;margin-bottom: 10px;">
+						<text>下次应还时间：</text>
+						<text>2020-09-15 09:42:52</text>
+					</view>
+					<view class="" style="display: flex;justify-content: space-between;margin-bottom: 10px;">
+						<text>下次应还金额：</text>
+						<text>5000.00元</text>
+					</view>
+				</view>
+				
+			</view>
+			
+		</view>
 	</view>
 </template>
 
@@ -41,6 +78,11 @@
 			console.log('========>> 详情页面, 路径:', this.$mp.page.route, '参数', options);
 			
 		},
+		onPullDownRefresh() {
+			setTimeout(()=>{
+				uni.stopPullDownRefresh();
+			},2000)
+		},
 		watch: {
 			//显示空白页
 			cartItems(e) {
@@ -50,6 +92,7 @@
 				}
 			}
 		},
+		
 		computed: {
 			...mapGetters(['hasLogin'])
 		},
@@ -99,6 +142,17 @@
 				}
 			}
 		}
+	}
+	
+	.wenzi {
+		    padding: 10px;
+		    border-radius: 10px 10px 0 0;
+		    border-top: 1px solid #fff;
+		    background: #fff;
+	}
+	.top {
+		padding: 10px 10px;
+		background:linear-gradient(#0055ff, #9198e5); ;
 	}
 
 	/* 购物车列表项 */
