@@ -448,4 +448,7 @@
 	.placeholder {
 		color: #999999;
 	}
+	uni-page-body {
+		height: 100%;
+	}
 </style>

@@ -10,8 +10,8 @@
 				<view class="navigator" @click="navToLogin">去登陆></view>
 			</view>
 		</view>
-		<view  v-else class="" >
-			<view class="top"  >
+		<view v-if="hasLogin && status.code == 5" class="">
+			<view class="top">
 				<view class="" style="display: flex;justify-content: space-between;margin-bottom: 10px;">
 					<text>提款金额（元）</text>
 					<text>放款金额：2020-08-15 09:42:52</text>
@@ -24,8 +24,8 @@
 					<text>时长：12个月</text>
 				</view>
 			</view>
-			<view class=""style="background-color: #9198e5;" >
-				<view class="wenzi" >
+			<view class="" style="background-color: #9198e5;">
+				<view class="wenzi">
 					<view class="" style="display: flex;justify-content: space-between;margin-bottom: 10px;">
 						<text>权益编号：</text>
 						<text>SX20215488888881011</text>
@@ -43,9 +43,19 @@
 						<text>5000.00元</text>
 					</view>
 				</view>
-				
 			</view>
-			
+			<view class="" style="background-color: #fff;padding: 5px 10px;border-bottom: 1px solid #F0F0F0;">
+				协议列表
+				<text class="iconfont icon-youbianjiantou "></text>
+			</view>
+			<view class="" style="background-color: #fff;padding: 5px 10px;border-bottom: 1px solid #F0F0F0;">
+				还款计划表
+				<text class="iconfont icon-youbianjiantou "></text>
+			</view>
+			<view class="" style="background-color: #fff;padding: 5px 10px;border-bottom: 1px solid #F0F0F0;">
+				权益申请详情
+				<text class="iconfont icon-youbianjiantou "></text>
+			</view>
 		</view>
 	</view>
 </template>
@@ -57,7 +67,7 @@
 	import {
 		mapGetters
 	} from 'vuex';
-	
+
 	import uniNumberBox from '@/components/uni-number-box.vue';
 	export default {
 		components: {
@@ -65,23 +75,23 @@
 		},
 		data() {
 			return {
-				
+
 				allChecked: false, //全选状态  true|false
 				empty: false, //空白页现实  true|false
-				
-				
+
+
 			};
 		},
 		// onLoad(options) {
 		onShow: function(options) {
-			
+
 			console.log('========>> 详情页面, 路径:', this.$mp.page.route, '参数', options);
-			
+
 		},
 		onPullDownRefresh() {
-			setTimeout(()=>{
+			setTimeout(() => {
 				uni.stopPullDownRefresh();
-			},2000)
+			}, 2000)
 		},
 		watch: {
 			//显示空白页
@@ -92,9 +102,9 @@
 				}
 			}
 		},
-		
+
 		computed: {
-			...mapGetters(['hasLogin'])
+			...mapGetters(['hasLogin', 'status'])
 		},
 		methods: {
 			// 跳转到登录页
@@ -109,7 +119,15 @@
 
 <style lang="scss">
 	.container {
-		padding-bottom: 134upx;
+
+		height: 100%;
+		background: #f5f5f5;
+
+		.icon-youbianjiantou {
+			float: right;
+			padding-right: 10px;
+			
+		}
 
 		/* 空白页 */
 		.empty {
@@ -143,16 +161,19 @@
 			}
 		}
 	}
-	
+
 	.wenzi {
-		    padding: 10px;
-		    border-radius: 10px 10px 0 0;
-		    border-top: 1px solid #fff;
-		    background: #fff;
+		padding: 10px;
+		border-radius: 10px 10px 0 0;
+		border-top: 1px solid #fff;
+		background: #fff;
+		margin-bottom: 10px;
 	}
+
 	.top {
 		padding: 10px 10px;
-		background:linear-gradient(#0055ff, #9198e5); ;
+		background: linear-gradient(#0055ff, #9198e5);
+		;
 	}
 
 	/* 购物车列表项 */

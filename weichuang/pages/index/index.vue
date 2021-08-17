@@ -5,9 +5,6 @@
 
 		</view>
 		<view class="header" style="height: 300px; position: relative;">
-			<view class="mianxi">
-				免息
-			</view>
 			<view class="" style="padding: 10px 0 20px 0;">
 				提倡理性消费，合理使用贷款
 			</view>
@@ -48,7 +45,7 @@
 
 		</view>
 		<view class="process" style="margin:10px">
-			贷款流程
+			<text class="bar"></text>贷款流程
 		</view>
 		<view class="process-box">
 			<view class="apply" style="display: flex;flex-direction: column;">
@@ -152,7 +149,7 @@
 			},
 			activeMoney() {
 				if (this.hasLogin) {
-					
+
 					switch (this.status.code) {
 						case -1: // // 预授信
 							uni.navigateTo({
@@ -222,26 +219,31 @@
 <style lang="scss">
 	.container {
 		height: 100%;
+		background: linear-gradient(#fafafd, #fff);
 
 		.background {
-			background-color: #007aff;
-			height: 200px;
+			background: linear-gradient(#125ef5, #fafafd);
+			height: 240px;
 		}
 
 		.header {
-			height: 300px;
+			height: 200px;
+			position: relative;
+			border-radius: 5px 5px 9px 9px;
+			border-bottom: 1px dashed #d1d1d1;
 			background-color: #FFFFFF;
-			margin: -200px 15px 0 15px;
+			margin: -230px 15px 0 15px;
 
 			text-align: center;
 			font-size: 12px;
 		}
 
-		.process::before {
-			content: "";
-			border: 3px solid #007aff;
-			border-radius: 3px;
-
+		.process {
+			.bar {
+				border: 3px solid #3967FF;
+				border-radius: 18px;
+				margin-right: 5px;
+			}
 		}
 
 		.process-box {
@@ -329,6 +331,7 @@
 			z-index: 5;
 			border-radius: 16upx 16upx 0 0;
 			margin-top: -20upx;
+			
 		}
 
 		.carousel-section {
@@ -412,7 +415,7 @@
 		padding: 30upx 22upx;
 		background: #fff;
 		margin: 0 15px;
-
+		border-radius: 9px 9px 0;
 		.cate-item {
 			display: flex;
 			flex-direction: column;
